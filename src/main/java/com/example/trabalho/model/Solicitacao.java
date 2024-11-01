@@ -1,40 +1,36 @@
 package com.example.trabalho.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long cod;
     private String titulo;
     private String assunto;
-    private String[] anexo;
-    private Date dataEnvio;
-
-    public Solicitacao() {
 
 
+    @OneToMany(mappedBy = "solicitacao")
+    private List<Funcionario> grupoFunc = new ArrayList<Funcionario>();
+
+    public Solicitacao() {}
+
+    public Solicitacao(String titulo, String assunto, List<Funcionario> grupoFunc) {
+        this.titulo = titulo;
+        this.assunto = assunto;
+        this.grupoFunc = grupoFunc;
     }
 
-    public void validarSolicitacao(){
-
-   }
-
-    public void visualizarSolicitacao(){
-
-   }
-
-    public String getId() {
-        return id;
+    public Long getCod() {
+        return cod;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setCod(Long cod) {
+        this.cod = cod;
     }
     public String getTitulo() {
         return titulo;
@@ -48,17 +44,19 @@ public class Solicitacao {
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
-    public String[] getAnexo() {
-        return anexo;
+    public List<Funcionario> getGrupoFunc() {
+        return grupoFunc;
     }
-    public void setAnexo(String[] anexo) {
-        this.anexo = anexo;
+
+    public void setGrupoFunc(List<Funcionario> grupoFunc) {
+        this.grupoFunc = grupoFunc;
     }
-    public Date getDataEnvio() {
-        return dataEnvio;
-    }
-    public void setDataEnvio(Date dataEnvio) {
-        this.dataEnvio = dataEnvio;
+
+    @Override
+    public String toString() {
+        return "Solicitação [codigo=" + cod + ", titulo=" + titulo + ", assunto=" + assunto + ", número de funcionários=" + grupoFunc.size() + "]";
     }
 
 }
+
+
