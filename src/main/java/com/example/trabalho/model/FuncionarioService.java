@@ -57,21 +57,39 @@ public class FuncionarioService {
         return sucesso;
     }
 
-    public boolean excluirFuncionario(long id){
-        boolean sucesso = false;
+    // public boolean excluirFuncionario(long id){
+    //     boolean sucesso = false;
 
+    //     try {
+    //         Funcionario encontrado = funcionarioDAO.pesquisarFuncionario(id);
+    //         if(encontrado == null){
+    //             funcionarioDAO.excluirFuncionario(encontrado);
+    //             sucesso = true;
+    //         } else {
+    //             System.err.printf("Funcionário %d não pode ser excluído, pois não foi encontrado" + id);
+    //         }
+    //     } catch (Exception e) {
+    //         System.err.printf("Erro ao excluir o funcionário %d", id);
+    //         System.err.println(e.getMessage());
+    //     }
+    //     return sucesso;
+    // }
+
+    public boolean excluirFuncionario(long id) {
+        boolean sucesso = false;
+    
         try {
             Funcionario encontrado = funcionarioDAO.pesquisarFuncionario(id);
-            if(encontrado == null){
+            if (encontrado != null) {
                 funcionarioDAO.excluirFuncionario(encontrado);
                 sucesso = true;
             } else {
-                System.err.printf("Funcionário %d não pode ser excluído, pois não foi encontrado" + id);
+                System.err.printf("Funcionário %d não pode ser excluído, pois não foi encontrado\n", id);
             }
         } catch (Exception e) {
-            System.err.printf("Erro ao excluir o funcionário %d", id);
-            System.err.println(e.getMessage());
+            System.err.printf("Erro ao excluir o funcionário %d: %s\n", id, e.getMessage());
         }
         return sucesso;
     }
+    
 }

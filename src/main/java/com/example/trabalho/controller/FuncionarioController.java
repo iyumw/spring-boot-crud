@@ -87,7 +87,8 @@ public class FuncionarioController {
         return retorno;
     }
 
-    @RequestMapping("/excluirFunc")
+    // @RequestMapping("/excluirFunc")
+    @RequestMapping(value = "/excluirFunc", method = RequestMethod.DELETE)
     @ResponseBody
     public String excluirFuncionario(@RequestParam(value = "identificação") long id) {
         String retorno = "";
