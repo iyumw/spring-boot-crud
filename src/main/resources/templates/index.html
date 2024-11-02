@@ -39,8 +39,8 @@
 </head>
 <body>
 <div class="pesquisa">
-    <input type="text" id="searchInput" placeholder="Pesquisar por nome...">
-    <button id="searchButton" onclick="pesquisarFuncionario()">Pesquisar</button>
+    <input type="text" id="searchInput" placeholder="Pesquisar por ID...">
+    <button id="searchButton">Pesquisar</button>
 </div>
 <table id="funcionarioTableBody">
     <thead>
@@ -62,9 +62,12 @@
 </table>
 
     <div class="botoesFooter">
-        <button>Editar</button>
+        <button id="editarFunc">Editar</button>
         <button>Apagar</button>
         <button>Atribuir Solicitação</button>
     </div>
+
+    <script src="/js/pesquisa.js"></script> 
+    <script src="/js/editar.js"></script>
 </body>
 </html>

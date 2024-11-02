@@ -4,7 +4,9 @@ import com.example.trabalho.model.Funcionario;
 import com.example.trabalho.model.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
@@ -19,19 +21,20 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    /*@RequestMapping("/listarFunc")
-    @ResponseBody
-    public String listarFuncionario() {
-        String retorno = "";
-
-        List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
-        for (Funcionario funcionario : funcionarios) {
-            retorno += " => " + funcionario.toString() + "\n";
-        }
-        return retorno;
-    }*/
-
-
+    /*
+     * @RequestMapping("/listarFunc")
+     * 
+     * @ResponseBody
+     * public String listarFuncionario() {
+     * String retorno = "";
+     * 
+     * List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
+     * for (Funcionario funcionario : funcionarios) {
+     * retorno += " => " + funcionario.toString() + "\n";
+     * }
+     * return retorno;
+     * }
+     */
 
     @RequestMapping("/listarFunc")
     public ModelAndView listarFuncionario() {
@@ -42,23 +45,33 @@ public class FuncionarioController {
         return modelAndView; // Retorna o ModelAndView
     }
 
+    /*
+     * @RequestMapping("/listarFunc")
+     * public String listarFuncionario(Model model) {
+     * List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); //
+     * Chama o serviço para obter a lista de funcionários
+     * model.addAttribute("funcionarios", funcionarios); // Adiciona a lista ao
+     * modelo
+     * return "index.html"; // Retorna o nome do template que será renderizado
+     * }
+     */
 
-   /* @RequestMapping("/listarFunc")
-    public String listarFuncionario(Model model) {
-        List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); // Chama o serviço para obter a lista de funcionários
-        model.addAttribute("funcionarios", funcionarios); // Adiciona a lista ao modelo
-        return "index.html"; // Retorna o nome do template que será renderizado
-    }*/
+    // @RequestMapping("/pesquisarFunc")
+    // @ResponseBody
+    // public String pesquisarFuncionario(@RequestParam(value = "identificação")
+    // long id) {
+    // String retorno = "";
 
-    @RequestMapping("/pesquisarFunc")
+    // Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
+    // retorno += " => "+ funcionario.toString();
+
+    // return retorno;
+    // }
+
+    @RequestMapping(value = "/pesquisarFunc", method = RequestMethod.GET)
     @ResponseBody
-    public String pesquisarFuncionario(@RequestParam(value = "identificação") long id) {
-        String retorno = "";
-
-        Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
-        retorno += " => "+ funcionario.toString();
-
-        return retorno;
+    public Funcionario pesquisarFuncionario(@RequestParam(value = "id") long id) {
+        return funcionarioService.pesquisarFuncionario(id);
     }
 
     @RequestMapping("/salvarFunc")
@@ -69,7 +82,7 @@ public class FuncionarioController {
         long id = Long.parseLong(parametros.get("identificação"));
         String nome = parametros.get("nome");
         boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome, id));
-        retorno += "=> Funcionário salvo: "+ ok;
+        retorno += "=> Funcionário salvo: " + ok;
 
         return retorno;
     }
@@ -80,10 +93,9 @@ public class FuncionarioController {
         String retorno = "";
 
         boolean ok = funcionarioService.excluirFuncionario(id);
-        retorno += " => Funcionário excluído: "+ ok;
+        retorno += " => Funcionário excluído: " + ok;
 
         return retorno;
     }
-
 
 }
