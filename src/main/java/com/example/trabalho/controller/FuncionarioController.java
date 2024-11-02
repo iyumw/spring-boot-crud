@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 import java.text.ParseException;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @RequestMapping("/listarFunc")
+    /*@RequestMapping("/listarFunc")
     @ResponseBody
     public String listarFuncionario() {
         String retorno = "";
@@ -27,7 +29,26 @@ public class FuncionarioController {
             retorno += " => " + funcionario.toString() + "\n";
         }
         return retorno;
+    }*/
+
+
+
+    @RequestMapping("/listarFunc")
+    public ModelAndView listarFuncionario() {
+        List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); // Obtém a lista de funcionários
+
+        ModelAndView modelAndView = new ModelAndView("index.html"); // Nome do template HTML
+        modelAndView.addObject("funcionarios", funcionarios); // Adiciona a lista ao modelo
+        return modelAndView; // Retorna o ModelAndView
     }
+
+
+   /* @RequestMapping("/listarFunc")
+    public String listarFuncionario(Model model) {
+        List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); // Chama o serviço para obter a lista de funcionários
+        model.addAttribute("funcionarios", funcionarios); // Adiciona a lista ao modelo
+        return "index.html"; // Retorna o nome do template que será renderizado
+    }*/
 
     @RequestMapping("/pesquisarFunc")
     @ResponseBody
