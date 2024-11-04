@@ -10,7 +10,7 @@ document.getElementById('apagarFunc').addEventListener('click', function() {
     });
 
     if (id) {
-        fetch(`/excluirFunc?identificação=${id}`, { method: 'DELETE' })
+        fetch(`http://localhost:8080/excluirFunc?identificacao=${id}`, { method: 'DELETE' })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('A resposta da rede não estava ok');
@@ -19,10 +19,12 @@ document.getElementById('apagarFunc').addEventListener('click', function() {
             })
             .then(data => {
                 alert(data);
+                location.reload();
             })
             .catch(error => {
                 console.error('Ouve um problema: ', error);
             });
+        
     } else {
         alert("Por favor, selecione um funcionário para apagar.");
     }

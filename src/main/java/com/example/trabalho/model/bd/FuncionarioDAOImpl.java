@@ -16,7 +16,13 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
     @Override
     public Funcionario pesquisarFuncionario(long id) throws Exception {
-        return null;
+        Funcionario funcionario = entityManager.find(Funcionario.class, id);
+        
+        if (funcionario == null) {
+            throw new Exception("Funcionário não encontrado com ID: " + id);
+        }
+        
+        return funcionario;
     }
 
     @Override

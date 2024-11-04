@@ -21,7 +21,7 @@ public class Funcionario {
 
     }
 
-    public Funcionario(String nome, Long id, List<Solicitacao> solicitacoes) {
+    public Funcionario(String nome, Long id) {
         this.nome = nome;
         this.id = id;
     }

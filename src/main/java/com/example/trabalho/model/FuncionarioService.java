@@ -26,14 +26,16 @@ public class FuncionarioService {
     }
 
     public Funcionario pesquisarFuncionario(long id){
-        Funcionario funcionario = null;
+        Funcionario func;
+        
         try {
-            funcionarioDAO.pesquisarFuncionario(id);
+            func = funcionarioDAO.pesquisarFuncionario(id);
         } catch (Exception e) {
             System.err.printf("Erro ao pesquisar funcionario % d", id);
             System.err.println(e.getMessage());
+            func = null;
         }
-        return funcionario;
+        return func;
     }
 
     public boolean salvarFuncionario(long id, Funcionario funcionario){

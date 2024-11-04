@@ -2,14 +2,17 @@ package com.example.trabalho.controller;
 
 import com.example.trabalho.model.Funcionario;
 import com.example.trabalho.model.FuncionarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,33 +48,11 @@ public class FuncionarioController {
         return modelAndView; // Retorna o ModelAndView
     }
 
-    /*
-     * @RequestMapping("/listarFunc")
-     * public String listarFuncionario(Model model) {
-     * List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); //
-     * Chama o serviço para obter a lista de funcionários
-     * model.addAttribute("funcionarios", funcionarios); // Adiciona a lista ao
-     * modelo
-     * return "index.html"; // Retorna o nome do template que será renderizado
-     * }
-     */
-
-    // @RequestMapping("/pesquisarFunc")
-    // @ResponseBody
-    // public String pesquisarFuncionario(@RequestParam(value = "identificação")
-    // long id) {
-    // String retorno = "";
-
-    // Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
-    // retorno += " => "+ funcionario.toString();
-
-    // return retorno;
-    // }
-
-    @RequestMapping(value = "/pesquisarFunc", method = RequestMethod.GET)
+    @RequestMapping("pesquisarFunc/{id}")
     @ResponseBody
-    public Funcionario pesquisarFuncionario(@RequestParam(value = "id") long id) {
-        return funcionarioService.pesquisarFuncionario(id);
+    public Funcionario pesquisarFuncionario(@PathVariable("id") long id) {
+        Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
+        return funcionario;
     }
 
     @RequestMapping("/salvarFunc")
@@ -79,7 +60,7 @@ public class FuncionarioController {
     public String salvarFuncionario(@RequestParam Map<String, String> parametros) throws ParseException {
         String retorno = "";
 
-        long id = Long.parseLong(parametros.get("identificação"));
+        long id = Long.parseLong(parametros.get("identificacao"));
         String nome = parametros.get("nome");
         boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome, id));
         retorno += "=> Funcionário salvo: " + ok;
@@ -90,7 +71,7 @@ public class FuncionarioController {
     // @RequestMapping("/excluirFunc")
     @RequestMapping(value = "/excluirFunc", method = RequestMethod.DELETE)
     @ResponseBody
-    public String excluirFuncionario(@RequestParam(value = "identificação") long id) {
+    public String excluirFuncionario(@RequestParam(value = "identificacao") long id) {
         String retorno = "";
 
         boolean ok = funcionarioService.excluirFuncionario(id);

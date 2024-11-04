@@ -7,7 +7,7 @@ function pesquisarFuncionario() {
     const id = document.getElementById('searchInput').value;
 
     if (id) {
-        fetch(`/pesquisarFunc?id=${id}`)
+        fetch(`http://localhost:8080/pesquisarFunc/${id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao buscar funcionário');
