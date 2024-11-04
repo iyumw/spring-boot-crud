@@ -3,44 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Funcionários UNIP</title>
+    <link rel="stylesheet" href="/css/estilos.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        .pesquisa {
-            margin-bottom: 1.5em;
-        }
-        table {
-            width: auto;
-            max-width: 80%;
-            border-collapse: collapse;
-            table-layout: auto;
-            margin-bottom: 1em;
-        }
-        thead {
-            background-color: #f2f2f2;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-            white-space: nowrap;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
+        
     </style>
 </head>
 <body>
+
+    <header class="cabecalho">
+        <h1 class="titulo"></h1>
+        <div class="links">
+            <a href="#" class="link">Tabela Funcionários</a>
+            <a href="#" class="link">Tabela Solicitações</a>
+        </div>
+    </header>
+
 <div class="pesquisa">
     <input type="text" id="searchInput" placeholder="Pesquisar por ID...">
-    <button id="searchButton">Pesquisar</button>
+    <button id="searchButton" class="botaoPesquisa">Pesquisar</button>
+    
 </div>
 <table id="funcionarioTableBody">
     <thead>

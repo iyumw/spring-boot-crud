@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+.pesquisa {
+    margin-bottom: 1.5em;
+}
+table {
+    width: auto;
+    max-width: 80%;
+    border-collapse: collapse;
+    table-layout: auto;
+    margin-bottom: 1em;
+}
+thead {
+    background-color: #f2f2f2;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    white-space: nowrap;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.cabecalho{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo{
+    margin-bottom: 1em;
+    /* background-color: blue; */
+    background-image: url('/imagens/logo-unip.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px; 
+    height: 80px;
+    display: inline-block;
+}
+
+.links{
+    margin-bottom: 2.5em;
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+}
+
+.botoesFooter{
+    margin-top: 1.3em;
+}
