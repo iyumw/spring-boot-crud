@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Funcionários UNIP</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <h1 class="titulo"></h1>
+        <div class="links">
+            <a href="/funcionarios/listar" class="link">Tabela Funcionários</a>
+            <a href="#" class="link">Tabela Solicitações</a>
+        </div>
+    </header>
+
+<div class="pesquisa">
+    <input type="text" id="searchInput" placeholder="Pesquisar por ID...">
+    <button id="searchButton" class="botaoPesquisa">Pesquisar</button>
+    
+</div>
+<table id="funcionarioTableBody">
+    <thead>
+    <tr>
+        <td>Selecionar</td>
+        <td>ID</td>
+        <td>Nome</td>
+        <td>Solicitações</td>
+
+    </tr>
+    </thead>
+    <tbody id="funcionarioTableBody">
+    <!-- <tr th:each="funcionario : ${funcionarios}">
+        <td><input type="radio" name="funcionario"></td>
+        <td th:text="${funcionario.id}"></td>
+        <td th:text="${funcionario.nome}"></td>
+        <td th:text="${funcionario.solicitacao}"></td> -->
+    </tbody>
+</table>
+
+    <div class="botoesFooter">
+        <button id="editarFunc">Editar</button>
+        <button id="apagarFunc">Apagar</button>
+        <button>Atribuir Solicitação</button>
+    </div>
+
+    <!-- <script src="/js/pesquisa.js"></script> 
+    <script src="/js/editar.js"></script>
+    <script src="/js/apagar.js"></script> -->
+    <script src="/js/index.js"></script>
+</body>
+</html>

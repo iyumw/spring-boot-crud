@@ -8,8 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import java.util.List;
 
-@RestController
+
+
+
+
+
 @RequestMapping("/funcionarios")
+@RestController
 public class FuncionarioController {
 
     @Autowired
@@ -25,7 +30,17 @@ public class FuncionarioController {
         }
     }
 
-    @GetMapping
+    // @GetMapping
+    // public ResponseEntity<List<Funcionario>> listarFuncionarios() {
+    // try {
+    // List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
+    // return ResponseEntity.ok(funcionarios);
+    // } catch (Exception e) {
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    // }
+    // }
+
+    @GetMapping("/listar")
     public ResponseEntity<List<Funcionario>> listarFuncionarios() {
         try {
             List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
