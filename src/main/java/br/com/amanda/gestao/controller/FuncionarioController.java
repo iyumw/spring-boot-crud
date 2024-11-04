@@ -51,14 +51,18 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> criarFuncionario(@RequestBody Funcionario funcionario) {
-        try {
-            funcionarioService.criarFuncionario(funcionario);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public ResponseEntity<Void> criarFuncionario(@RequestParam String nome) {
+    try {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNome(nome);
+        funcionarioService.criarFuncionario(funcionario);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+}
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {

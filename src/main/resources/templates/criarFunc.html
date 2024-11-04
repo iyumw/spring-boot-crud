@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Funcionários UNIP</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Adicionar Novo Funcionário</h1>
+    <form th:action="@{/funcionarios}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <button type="submit" id="btnAdd">Adicionar Funcionário</button>
+    </form>
+    <a href="/">Voltar</a>
+
+    <script src="/js/adicionar.js"></script>
+</body>
