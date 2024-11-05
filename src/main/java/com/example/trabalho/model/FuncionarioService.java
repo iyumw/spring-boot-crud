@@ -22,6 +22,7 @@ public class FuncionarioService {
         } catch (Exception e){
             System.err.println("Erro ao listar funcionarios: " + e.getMessage());
         }
+        System.out.println(lista);
         return lista;
     }
 

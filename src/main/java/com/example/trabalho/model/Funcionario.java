@@ -14,7 +14,7 @@ public class Funcionario {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "funcionario")
+    @JoinColumn(name = "solicitacao")
     private Solicitacao solicitacao;
 
     public Funcionario() {

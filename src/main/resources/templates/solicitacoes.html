@@ -34,13 +34,13 @@
 
     </tr>
     </thead>
-    <tbody>
-        <tr th:each="solicitacao : ${listaSolicitacoes}">
+    <tbody id="tabelaSolicitacoes">
+        <!-- <tr th:each="solicitacao : ${listarSolicitacoes}"> -->
             <!-- <td><input type="radio" name="solicitacao"></td> -->
-            <td th:text="${solicitacao.cod}"></td>
+            <!-- <td th:text="${solicitacao.cod}"></td>
             <td th:text="${solicitacao.titulo}"></td>
-            <td th:text="${solicitacao.assunto}"></td>
-        </tr>
+            <td th:text="${solicitacao.assunto}"></td> -->
+        <!-- </tr> -->
     </tbody>
 </table>
 
@@ -53,6 +53,6 @@
     <script src="/js/pesquisa.js"></script> 
     <script src="/js/editar.js"></script>
     <script src="/js/apagar.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/listarSolicitacoes.js"></script>
 </body>
 </html>
