@@ -1,5 +1,5 @@
 package com.example.trabalho.controller;
-
+import org.springframework.ui.Model;
 import com.example.trabalho.model.Funcionario;
 import com.example.trabalho.model.FuncionarioService;
 import com.example.trabalho.model.Solicitacao;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -22,18 +23,29 @@ public class SolicitacaoController {
     @Autowired
     private FuncionarioService funcionarioService;
 
+    // @RequestMapping("/listarSolic")
+    // @ResponseBody
+    // public String listarSolicitacao() {
+    // String retorno = "";
+
+    // List<Solicitacao> solicitacoes = solicitacaoService.listarSolicitacoes();
+
+    // for (Solicitacao solicitacao : solicitacoes) {
+    // retorno += " => " + solicitacao.toString();
+    // }
+    // return retorno;
+    // }
+
     @RequestMapping("/listarSolic")
-    @ResponseBody
-    public String listarSolicitacao() {
-        String retorno = "";
-
-        List<Solicitacao> solicitacoes = solicitacaoService.listarSolicitacoes();
-
-        for (Solicitacao solicitacao : solicitacoes) {
-            retorno += " => " + solicitacao.toString();
-        }
-        return retorno;
+    public ModelAndView listarSolicitacao() {
+        List<Solicitacao> listaSolicitacoes = solicitacaoService.listarSolicitacoes(); 
+        System.out.println("************************************" + listaSolicitacoes.size());
+        ModelAndView modelAndView = new ModelAndView("solicitacoes"); 
+        modelAndView.addObject("solicitacoes", listaSolicitacoes); 
+        return modelAndView; 
     }
+
+    
 
     @RequestMapping("/pesquisarSolic")
     @ResponseBody
@@ -52,7 +64,7 @@ public class SolicitacaoController {
         String retorno = "";
         long cod = Long.parseLong(parametros.get("codigo"));
         String titulo = parametros.get("titulo");
-        String assunto  = parametros.get("assunto");
+        String assunto = parametros.get("assunto");
         List<Funcionario> grupoFunc = new ArrayList<Funcionario>();
 
         boolean ok = solicitacaoService.incluirSolicitacao(cod, new Solicitacao(titulo, assunto, grupoFunc));

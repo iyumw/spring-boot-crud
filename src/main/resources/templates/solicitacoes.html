@@ -29,17 +29,18 @@
     <tr>
         <td>Selecionar</td>
         <td>ID</td>
-        <td>Nome</td>
-        <td>Solicitações</td>
+        <td>Titulo</td>
+        <td>Assunto</td>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="funcionario : ${funcionarios}">
-        <td><input type="radio" name="funcionario"></td>
-        <td th:text="${funcionario.id}"></td>
-        <td th:text="${funcionario.nome}"></td>
-        <td th:text="${funcionario.solicitacao}"></td>
+        <tr th:each="solicitacao : ${listaSolicitacoes}">
+            <!-- <td><input type="radio" name="solicitacao"></td> -->
+            <td th:text="${solicitacao.cod}"></td>
+            <td th:text="${solicitacao.titulo}"></td>
+            <td th:text="${solicitacao.assunto}"></td>
+        </tr>
     </tbody>
 </table>
 

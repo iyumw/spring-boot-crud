@@ -15,8 +15,7 @@ public class SolicitacaoDAOImpl implements SolicitacaoDAO {
     private EntityManager entityManager;
     @Override
     public List<Solicitacao> listarSolicitacoes() throws SQLException {
-        return entityManager.createQuery("from Solicitacao").getResultList();
-    }
+        return entityManager.createQuery("from Solicitacao", Solicitacao.class).getResultList();    }
 
     @Override
     public void incluirSolicitacao(long cod, Solicitacao solicitacao) throws Exception {
