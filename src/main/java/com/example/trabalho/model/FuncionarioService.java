@@ -119,16 +119,22 @@ public class FuncionarioService {
     // }
 
     // Método para criar um novo funcionário, recebendo o ID do usuário
-    @PostMapping("/funcionarios")
-    public Funcionario criarFuncionario(Funcionario funcionario) {
-        for (Funcionario f : funcionarios) {
-            if (f.getId().equals(funcionario.getId())) {
-                throw new RuntimeException("Já existe um funcionário com o ID " + funcionario.getId() + ".");
-            }
+    
+    public void criarFuncionario(Funcionario funcionario) throws Exception {
+        try {
+            funcionarioDAO.criarFuncionario(funcionario); // Assumindo que este método persiste o funcionário no banco de dados
+        } catch (Exception e) {
+            System.err.println("Erro ao criar funcionário: " + e.getMessage());
+            throw e; // Repassa a exceção para o controlador
         }
+        // for (Funcionario f : funcionarios) {
+        //     if (f.getId().equals(funcionario.getId())) {
+        //         throw new RuntimeException("Já existe um funcionário com o ID " + funcionario.getId() + ".");
+        //     }
+        // }
         
-        funcionarios.add(funcionario);
-        return funcionario;
+        // funcionarios.add(funcionario);
+        // return funcionario;
     }
 
     public Funcionario editarFuncionario(Long id, Funcionario dadosAtualizados) {

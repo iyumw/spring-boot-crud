@@ -8,7 +8,7 @@
 <body>
   <h1>Adicionar Novo Funcionário</h1>
 
-  <form th:action="@{/salvarFunc}" method="post">
+  <form th:action="@{/criarFunc}" method="post">
     <label for="identificacao">Identificação:</label>
     <input type="number" id="identificacao" name="identificacao" required>
 
@@ -18,5 +18,7 @@
     <button type="submit" id="btnAdd">Adicionar Funcionário</button>
   </form>
   <a href="/">Voltar</a>
+
+  <script src="/js/criar.js"></script>
 </body>
 </html>

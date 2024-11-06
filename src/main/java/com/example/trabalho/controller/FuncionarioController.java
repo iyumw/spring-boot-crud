@@ -56,28 +56,56 @@ public class FuncionarioController {
         return funcionario;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> criarFuncionario(@RequestBody String nome) {
-    try {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(nome);
-        funcionarioService.criarFuncionario(funcionario);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
-    }   
+    
 
-     @PutMapping("/{id}")
-    public ResponseEntity<Void> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
-        try {
-            funcionario.setId(id);
-            funcionarioService.editarFuncionario(id, funcionario);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    // @PostMapping("/criarFunc")
+    // public String criarFuncionario(@RequestParam("nome") String nome) {
+    // try {
+    //     Funcionario funcionario = new Funcionario();
+    //     funcionario.setNome(nome);
+    //     funcionarioService.criarFuncionario(funcionario);
+    //     return "redirect:/listarFunc";
+    // } catch (Exception e) {
+    //     e.printStackTrace(); // Exibe a exceção no console para depuração
+    //         return "error";
+    // }
+    // }   
+
+    @PutMapping("/{id}")
+public ResponseEntity<Funcionario> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
+  try {
+    // Busca o funcionário pelo ID informado na URL
+    Funcionario funcionarioExistente = funcionarioService.pesquisarFuncionario(id);
+
+    // Verifica se o funcionário foi encontrado
+    if (funcionarioExistente == null) {
+      return ResponseEntity.notFound().build(); // Retorna 404 Not Found
     }
+
+    // Atualiza os dados do funcionário existente com os dados do objeto recebido
+    funcionarioExistente.setNome(funcionario.getNome()); // Exemplo de atualização de um campo
+    // Atualize outros campos conforme sua necessidade
+
+    // Salva o funcionário atualizado no banco de dados
+    funcionarioService.editarFuncionario(funcionarioExistente.getId(), funcionarioExistente);
+
+    return ResponseEntity.ok(funcionario); // Retorna 200 OK
+  } catch (Exception e) {
+    // Trata a exceção caso ocorra algum erro durante a atualização
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retorna 500 Internal Server Error
+  }
+}
+
+    //  @PutMapping("/{id}")
+    // public ResponseEntity<Void> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
+    //     try {
+    //         funcionario.setId(id);
+    //         funcionarioService.editarFuncionario(id, funcionario);
+    //         return ResponseEntity.ok().build();
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //     }
+    // }
 
     // @PostMapping("/salvarFunc")
     // public ResponseEntity<Void> salvarFuncionario(@RequestParam Funcionario funcionario) {
