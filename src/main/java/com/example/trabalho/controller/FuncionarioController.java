@@ -71,7 +71,7 @@ public class FuncionarioController {
     // }
     // }   
 
-    @PutMapping("/{id}")
+    @PutMapping("/editarFuncionario/{id}")
 public ResponseEntity<Funcionario> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
   try {
     // Busca o funcionário pelo ID informado na URL

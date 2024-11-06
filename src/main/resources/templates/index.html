@@ -25,7 +25,7 @@
     <button id="searchButton" class="botaoPesquisa">Pesquisar</button>
     
 </div>
-<table id="funcionarioTableBody">
+<table id="tableBody">
     <thead>
     <tr>
         <td>Selecionar</td>
@@ -35,7 +35,7 @@
 
     </tr>
     </thead>
-    <tbody>
+    <tbody id="funcionarioTableBody">
     <tr th:each="funcionario : ${funcionarios}">
         <td><input type="radio" name="funcionario"></td>
         <td th:text="${funcionario.id}"></td>
@@ -47,7 +47,7 @@
     <div class="botoesFooter">
         <button id="editarFunc">Editar</button>
         <button id="apagarFunc">Apagar</button>
-        <button>Atribuir Solicitação</button>
+        <!-- <button>Atribuir Solicitação</button> -->
     </div>
 
     <script src="/js/pesquisa.js"></script> 
