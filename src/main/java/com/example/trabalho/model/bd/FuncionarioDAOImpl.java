@@ -31,8 +31,13 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         entityManager.createQuery("from Funcionario", Funcionario.class).getResultList();
     }
 
+    // @Override
+    // public void salvarFuncionario(Funcionario funcionario) throws Exception {
+    //     entityManager.persist(funcionario);
+    // }
+
     @Override
-    public void salvarFuncionario(Funcionario funcionario) throws Exception {
+    public void criarFuncionario(Funcionario funcionario) throws Exception {
         entityManager.persist(funcionario);
     }
 

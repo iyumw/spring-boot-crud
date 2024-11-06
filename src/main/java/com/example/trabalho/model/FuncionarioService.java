@@ -1,11 +1,13 @@
 package com.example.trabalho.model;
-import org.springframework.transaction.annotation.Transactional;
-import com.example.trabalho.model.bd.FuncionarioDAO;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import com.example.trabalho.model.bd.FuncionarioDAO;
 
 
 @Service
@@ -13,6 +15,8 @@ public class FuncionarioService {
     @Autowired
     @Qualifier("Hibernate")
     private FuncionarioDAO funcionarioDAO;
+
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
     public List<Funcionario> listarFuncionarios(){
         List<Funcionario> lista = null;
@@ -57,14 +61,14 @@ public class FuncionarioService {
     //     }
     //     return sucesso;
     // }
-    public void salvarFuncionario(Funcionario funcionario) {
-        try
-        {funcionarioDAO.salvarFuncionario(funcionario);}
-        catch (Exception e) {
-                     System.err.printf("Erro ao incluir/alterar o funcionário %d");
-                     System.err.println(e.getMessage());
-                 }
-    }
+    // public void salvarFuncionario(Funcionario funcionario) {
+    //     try
+    //     {funcionarioDAO.salvarFuncionario(funcionario);}
+    //     catch (Exception e) {
+    //                  System.err.printf("Erro ao incluir/alterar o funcionário %d");
+    //                  System.err.println(e.getMessage());
+    //              }
+    // }
 //}
     // public boolean excluirFuncionario(long id){
     //     boolean sucesso = false;
@@ -105,5 +109,53 @@ public class FuncionarioService {
     // public void criarFuncionario(Funcionario funcionario) throws Exception {
     //     funcionarioDAO.criarFuncionario(funcionario);
     // }
+
+    // public void criarFuncionario(Funcionario funcionario) throws Exception {
+    //     try {
+    //         entityManager.persist(funcionario);
+    //     } catch (Exception e) {
+    //         throw new Exception("Erro ao criar funcionário", e);
+    //     }
+    // }
+
+    // Método para criar um novo funcionário, recebendo o ID do usuário
+    @PostMapping("/funcionarios")
+    public Funcionario criarFuncionario(Funcionario funcionario) {
+        for (Funcionario f : funcionarios) {
+            if (f.getId().equals(funcionario.getId())) {
+                throw new RuntimeException("Já existe um funcionário com o ID " + funcionario.getId() + ".");
+            }
+        }
+        
+        funcionarios.add(funcionario);
+        return funcionario;
+    }
+
+    public Funcionario editarFuncionario(Long id, Funcionario dadosAtualizados) {
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getId().equals(id)) {
+                funcionario.setNome(dadosAtualizados.getNome()); // Atualiza o nome
+                return funcionario;
+            }
+        }
+        throw new RuntimeException("Funcionário com ID " + id + " não encontrado.");
+    }
+    
+    // public Funcionario editarFuncionario(Long id, @Valid Funcionario dadosAtualizados) {
+    //     try {
+    //         Optional<Funcionario> funcionarioExistente = funcionarios.stream().filter(funcionario -> funcionario.getId().equals(id)).findFirst();
+
+    //         if (funcionarioExistente.isPresent()) {
+    //             Funcionario funcionario = funcionarioExistente.get();
+    //             funcionario.setNome(dadosAtualizados.getNome()); // Atualiza o nome
+    //             return funcionario;
+    //         } else {
+    //             throw new RuntimeException("Funcionário com ID " + id + " não encontrado.");
+    //         }
+    //     } catch (Exception e) {
+    //         throw new RuntimeException("Erro ao editar funcionário: " + e.getMessage());
+    //     }
+    // }
+
     
 }
