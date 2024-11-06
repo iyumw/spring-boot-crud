@@ -22,134 +22,162 @@ import com.example.trabalho.model.FuncionarioService;
 
 @RestController
 public class FuncionarioController {
-    @Autowired
-    private FuncionarioService funcionarioService;
+  @Autowired
+  private FuncionarioService funcionarioService;
 
-    /*
-     * @RequestMapping("/listarFunc")
-     * 
-     * @ResponseBody
-     * public String listarFuncionario() {
-     * String retorno = "";
-     * 
-     * List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
-     * for (Funcionario funcionario : funcionarios) {
-     * retorno += " => " + funcionario.toString() + "\n";
-     * }
-     * return retorno;
-     * }
-     */
+  /*
+   * @RequestMapping("/listarFunc")
+   * 
+   * @ResponseBody
+   * public String listarFuncionario() {
+   * String retorno = "";
+   * 
+   * List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
+   * for (Funcionario funcionario : funcionarios) {
+   * retorno += " => " + funcionario.toString() + "\n";
+   * }
+   * return retorno;
+   * }
+   */
 
-    @RequestMapping("/listarFunc")
-    public ModelAndView listarFuncionario() {
-        List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); // Obtém a lista de funcionários
+  @RequestMapping("/listarFunc")
+  public ModelAndView listarFuncionario() {
+    List<Funcionario> funcionarios = funcionarioService.listarFuncionarios(); // Obtém a lista de funcionários
 
-        ModelAndView modelAndView = new ModelAndView("index.html"); // Nome do template HTML
-        modelAndView.addObject("funcionarios", funcionarios); // Adiciona a lista ao modelo
-        return modelAndView; // Retorna o ModelAndView
-    }
-
-    @RequestMapping("pesquisarFunc/{id}")
-    @ResponseBody
-    public Funcionario pesquisarFuncionario(@PathVariable("id") long id) {
-        Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
-        return funcionario;
-    }
-
-    
-
-    // @PostMapping("/criarFunc")
-    // public String criarFuncionario(@RequestParam("nome") String nome) {
-    // try {
-    //     Funcionario funcionario = new Funcionario();
-    //     funcionario.setNome(nome);
-    //     funcionarioService.criarFuncionario(funcionario);
-    //     return "redirect:/listarFunc";
-    // } catch (Exception e) {
-    //     e.printStackTrace(); // Exibe a exceção no console para depuração
-    //         return "error";
-    // }
-    // }   
-
-    @PutMapping("/editarFuncionario/{id}")
-public ResponseEntity<Funcionario> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
-  try {
-    // Busca o funcionário pelo ID informado na URL
-    Funcionario funcionarioExistente = funcionarioService.pesquisarFuncionario(id);
-
-    // Verifica se o funcionário foi encontrado
-    if (funcionarioExistente == null) {
-      return ResponseEntity.notFound().build(); // Retorna 404 Not Found
-    }
-
-    // Atualiza os dados do funcionário existente com os dados do objeto recebido
-    funcionarioExistente.setNome(funcionario.getNome()); // Exemplo de atualização de um campo
-    // Atualize outros campos conforme sua necessidade
-
-    // Salva o funcionário atualizado no banco de dados
-    funcionarioService.editarFuncionario(funcionarioExistente.getId(), funcionarioExistente);
-
-    return ResponseEntity.ok(funcionario); // Retorna 200 OK
-  } catch (Exception e) {
-    // Trata a exceção caso ocorra algum erro durante a atualização
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retorna 500 Internal Server Error
+    ModelAndView modelAndView = new ModelAndView("index.html"); // Nome do template HTML
+    modelAndView.addObject("funcionarios", funcionarios); // Adiciona a lista ao modelo
+    return modelAndView; // Retorna o ModelAndView
   }
-}
 
-    //  @PutMapping("/{id}")
-    // public ResponseEntity<Void> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
-    //     try {
-    //         funcionario.setId(id);
-    //         funcionarioService.editarFuncionario(id, funcionario);
-    //         return ResponseEntity.ok().build();
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    //     }
-    // }
+  @RequestMapping("pesquisarFunc/{id}")
+  @ResponseBody
+  public Funcionario pesquisarFuncionario(@PathVariable("id") long id) {
+    Funcionario funcionario = funcionarioService.pesquisarFuncionario(id);
+    return funcionario;
+  }
 
-    // @PostMapping("/salvarFunc")
-    // public ResponseEntity<Void> salvarFuncionario(@RequestParam Funcionario funcionario) {
-    //     funcionarioService.salvarFuncionario(funcionario);
-    //     return ResponseEntity.ok().build();
-    // }
+  // @PostMapping("/criarFunc")
+  // public String criarFuncionario(@RequestParam("nome") String nome) {
+  // try {
+  // Funcionario funcionario = new Funcionario();
+  // funcionario.setNome(nome);
+  // funcionarioService.criarFuncionario(funcionario);
+  // return "redirect:/listarFunc";
+  // } catch (Exception e) {
+  // e.printStackTrace(); // Exibe a exceção no console para depuração
+  // return "error";
+  // }
+  // }
 
-    // @RequestMapping("/salvarFunc")
-    // @ResponseBody
-    // public String salvarFuncionario(@RequestParam Map<String, String> parametros)
-    // throws ParseException {
-    // String retorno = "";
+  // @PutMapping("/editarFuncionario/{id}")
+  // public ResponseEntity<Funcionario> editarFuncionario(@PathVariable long id, @RequestBody Funcionario funcionario) {
+  //   try {
+  //     // Busca o funcionário pelo ID informado na URL
+  //     Funcionario funcionarioExistente = funcionarioService.pesquisarFuncionario(id);
 
-    // long id = Long.parseLong(parametros.get("identificacao"));
-    // String nome = parametros.get("nome");
-    // boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome,
-    // id));
-    // retorno += "=> Funcionário salvo: " + ok;
+  //     // Verifica se o funcionário foi encontrado
+  //     if (funcionarioExistente == null) {
+  //       return ResponseEntity.notFound().build(); // Retorna 404 Not Found
+  //     }
 
-    // return retorno;
-    // }
+  //     // Atualiza os dados do funcionário existente com os dados do objeto recebido
+  //     funcionarioExistente.setNome(funcionario.getNome()); // Exemplo de atualização de um campo
+  //     // Atualize outros campos conforme sua necessidade
 
-    // @PostMapping
-    // public ResponseEntity<Void> criarFuncionario(@RequestParam String nome) {
-    // try {
-    // Funcionario funcionario = new Funcionario();
-    // funcionario.setNome(nome);
-    // funcionarioService.criarFuncionario(funcionario);
-    // return ResponseEntity.status(HttpStatus.CREATED).build();
-    // } catch (Exception e) {
-    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    // }
-    // }
+  //     // Salva o funcionário atualizado no banco de dados
+  //     funcionarioService.editarFuncionario(funcionarioExistente.getId(), funcionarioExistente);
 
-    // @RequestMapping("/excluirFunc")
-    @RequestMapping(value = "/excluirFunc", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String excluirFuncionario(@RequestParam(value = "identificacao") long id) {
-        String retorno = "";
+  //     return ResponseEntity.ok(funcionario); // Retorna 200 OK
+  //   } catch (Exception e) {
+  //     // Trata a exceção caso ocorra algum erro durante a atualização
+  //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retorna 500 Internal Server Error
+  //   }
+  // }
 
-        boolean ok = funcionarioService.excluirFuncionario(id);
-        retorno += " => Funcionário excluído: " + ok;
-
-        return retorno;
+  @PutMapping("/editarFuncionario/{id}")
+    public String editarFuncionario(@PathVariable("id") long id, @RequestParam("nome") String nome) {
+        try {
+            // Busca o funcionário pelo ID
+            Funcionario funcionarioExistente = funcionarioService.pesquisarFuncionario(id);
+            
+            // Verifica se o funcionário foi encontrado
+            if (funcionarioExistente == null) {
+                return "error"; // Retorna uma página de erro ou uma mensagem de erro caso não encontre o funcionário
+            }
+            
+            // Atualiza o nome do funcionário com o novo valor
+            funcionarioExistente.setNome(nome);
+            
+            // Salva as alterações do funcionário
+            funcionarioService.editarFuncionario(funcionarioExistente.getId(), funcionarioExistente);
+            
+            // Redireciona para a página de listagem de funcionários após a edição
+            return "redirect:/listarFunc"; // Alterar o redirecionamento para a página correta
+            
+        } catch (Exception e) {
+            e.printStackTrace(); // Exibe a exceção no console para depuração
+            return "error"; // Retorna uma página de erro ou uma mensagem de erro
+        }
     }
+  
+
+
+  // @PutMapping("/{id}")
+  // public ResponseEntity<Void> editarFuncionario(@PathVariable long id,
+  // @RequestBody Funcionario funcionario) {
+  // try {
+  // funcionario.setId(id);
+  // funcionarioService.editarFuncionario(id, funcionario);
+  // return ResponseEntity.ok().build();
+  // } catch (Exception e) {
+  // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+  // }
+  // }
+
+  // @PostMapping("/salvarFunc")
+  // public ResponseEntity<Void> salvarFuncionario(@RequestParam Funcionario
+  // funcionario) {
+  // funcionarioService.salvarFuncionario(funcionario);
+  // return ResponseEntity.ok().build();
+  // }
+
+  // @RequestMapping("/salvarFunc")
+  // @ResponseBody
+  // public String salvarFuncionario(@RequestParam Map<String, String> parametros)
+  // throws ParseException {
+  // String retorno = "";
+
+  // long id = Long.parseLong(parametros.get("identificacao"));
+  // String nome = parametros.get("nome");
+  // boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome,
+  // id));
+  // retorno += "=> Funcionário salvo: " + ok;
+
+  // return retorno;
+  // }
+
+  // @PostMapping
+  // public ResponseEntity<Void> criarFuncionario(@RequestParam String nome) {
+  // try {
+  // Funcionario funcionario = new Funcionario();
+  // funcionario.setNome(nome);
+  // funcionarioService.criarFuncionario(funcionario);
+  // return ResponseEntity.status(HttpStatus.CREATED).build();
+  // } catch (Exception e) {
+  // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+  // }
+  // }
+
+  // @RequestMapping("/excluirFunc")
+  @RequestMapping(value = "/excluirFunc", method = RequestMethod.DELETE)
+  @ResponseBody
+  public String excluirFuncionario(@RequestParam(value = "identificacao") long id) {
+    String retorno = "";
+
+    boolean ok = funcionarioService.excluirFuncionario(id);
+    retorno += " => Funcionário excluído: " + ok;
+
+    return retorno;
+  }
 
 }

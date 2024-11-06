@@ -50,6 +50,30 @@
         <!-- <button>Atribuir Solicitação</button> -->
     </div>
 
+    <div class="modal" id="modalEditar" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Funcionário</h5>
+                    <button type="button" class="close" id="fecharModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarFuncionario" method="POST">
+                        <input type="hidden" name="id" id="funcionarioId">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" id="fecharModal">Fechar</button> -->
+                    <button type="submit" class="btn btn-primary" id="salvarFuncionario">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/pesquisa.js"></script> 
     <script src="/js/editar.js"></script>
     <script src="/js/apagar.js"></script>
