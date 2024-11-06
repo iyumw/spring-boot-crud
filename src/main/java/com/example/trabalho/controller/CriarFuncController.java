@@ -27,8 +27,8 @@ public class CriarFuncController {
         }
     }
 
-//     @GetMapping("/criarFunc")
-//     public String criarFuncionario() {
-//         return "criarFunc";
-//     }
+    @GetMapping("/criarFunc")
+    public String criarFuncionario() {
+        return "criarFunc";
+    }
 }
