@@ -4,9 +4,13 @@ import com.example.trabalho.model.Funcionario;
 import com.example.trabalho.model.FuncionarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,18 +59,38 @@ public class FuncionarioController {
         return funcionario;
     }
 
-    @RequestMapping("/salvarFunc")
-    @ResponseBody
-    public String salvarFuncionario(@RequestParam Map<String, String> parametros) throws ParseException {
-        String retorno = "";
-
-        long id = Long.parseLong(parametros.get("identificacao"));
-        String nome = parametros.get("nome");
-        boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome, id));
-        retorno += "=> Funcionário salvo: " + ok;
-
-        return retorno;
+    @PostMapping("/salvarFunc")
+    public ResponseEntity<Void> salvarFuncionario(@RequestParam Funcionario funcionario) {
+        funcionarioService.salvarFuncionario(funcionario);
+        return ResponseEntity.ok().build();
     }
+
+    // @RequestMapping("/salvarFunc")
+    // @ResponseBody
+    // public String salvarFuncionario(@RequestParam Map<String, String> parametros)
+    // throws ParseException {
+    // String retorno = "";
+
+    // long id = Long.parseLong(parametros.get("identificacao"));
+    // String nome = parametros.get("nome");
+    // boolean ok = funcionarioService.salvarFuncionario(id, new Funcionario(nome,
+    // id));
+    // retorno += "=> Funcionário salvo: " + ok;
+
+    // return retorno;
+    // }
+
+    // @PostMapping
+    // public ResponseEntity<Void> criarFuncionario(@RequestParam String nome) {
+    // try {
+    // Funcionario funcionario = new Funcionario();
+    // funcionario.setNome(nome);
+    // funcionarioService.criarFuncionario(funcionario);
+    // return ResponseEntity.status(HttpStatus.CREATED).build();
+    // } catch (Exception e) {
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    // }
+    // }
 
     // @RequestMapping("/excluirFunc")
     @RequestMapping(value = "/excluirFunc", method = RequestMethod.DELETE)

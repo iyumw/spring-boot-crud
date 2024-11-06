@@ -1,5 +1,5 @@
 package com.example.trabalho.model;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.example.trabalho.model.bd.FuncionarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,27 +39,33 @@ public class FuncionarioService {
         return func;
     }
 
-    public boolean salvarFuncionario(long id, Funcionario funcionario){
-        boolean sucesso = false;
+    // public boolean salvarFuncionario(long id, Funcionario funcionario){
+    //     boolean sucesso = false;
 
-        try {
-            Funcionario encontrado = funcionarioDAO.pesquisarFuncionario(id);
+    //     try {
+    //         Funcionario encontrado = funcionarioDAO.pesquisarFuncionario(id);
 
-            if(encontrado == null){
-                funcionarioDAO.criarFuncionario(funcionario);
-                sucesso = true;
-            } else {
-                encontrado.setNome(funcionario.getNome());
-                funcionarioDAO.editarFuncionario(encontrado);
-                sucesso = true;
-            }
-        } catch (Exception e) {
-            System.err.printf("Erro ao incluir/alterar o funcionário %d", id);
-            System.err.println(e.getMessage());
-        }
-        return sucesso;
+    //         if(encontrado == null){
+    //             funcionarioDAO.salvarFuncionario(funcionario);
+    //             sucesso = true;
+    //         } else {
+    //             sucesso = false;
+    //         }
+    //     } catch (Exception e) {
+    //         System.err.printf("Erro ao incluir/alterar o funcionário %d", id);
+    //         System.err.println(e.getMessage());
+    //     }
+    //     return sucesso;
+    // }
+    public void salvarFuncionario(Funcionario funcionario) {
+        try
+        {funcionarioDAO.salvarFuncionario(funcionario);}
+        catch (Exception e) {
+                     System.err.printf("Erro ao incluir/alterar o funcionário %d");
+                     System.err.println(e.getMessage());
+                 }
     }
-
+//}
     // public boolean excluirFuncionario(long id){
     //     boolean sucesso = false;
 
@@ -94,5 +100,10 @@ public class FuncionarioService {
         }
         return sucesso;
     }
+
+    // @Transactional
+    // public void criarFuncionario(Funcionario funcionario) throws Exception {
+    //     funcionarioDAO.criarFuncionario(funcionario);
+    // }
     
 }

@@ -32,7 +32,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
     }
 
     @Override
-    public void criarFuncionario(Funcionario funcionario) throws Exception {
+    public void salvarFuncionario(Funcionario funcionario) throws Exception {
         entityManager.persist(funcionario);
     }
 
