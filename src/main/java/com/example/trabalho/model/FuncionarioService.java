@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.trabalho.model.bd.FuncionarioDAO;
+import com.example.trabalho.model.DAO.FuncionarioDAO;
 
 
 @Service
@@ -70,23 +70,6 @@ public class FuncionarioService {
     //              }
     // }
 //}
-    // public boolean excluirFuncionario(long id){
-    //     boolean sucesso = false;
-
-    //     try {
-    //         Funcionario encontrado = funcionarioDAO.pesquisarFuncionario(id);
-    //         if(encontrado == null){
-    //             funcionarioDAO.excluirFuncionario(encontrado);
-    //             sucesso = true;
-    //         } else {
-    //             System.err.printf("Funcionário %d não pode ser excluído, pois não foi encontrado" + id);
-    //         }
-    //     } catch (Exception e) {
-    //         System.err.printf("Erro ao excluir o funcionário %d", id);
-    //         System.err.println(e.getMessage());
-    //     }
-    //     return sucesso;
-    // }
 
     public boolean excluirFuncionario(long id) {
         boolean sucesso = false;

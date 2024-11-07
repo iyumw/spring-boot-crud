@@ -1,4 +1,4 @@
-package com.example.trabalho.model.bd;
+package com.example.trabalho.model.DAO;
 
 import com.example.trabalho.model.Funcionario;
 import jakarta.persistence.EntityManager;

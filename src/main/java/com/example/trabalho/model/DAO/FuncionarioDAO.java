@@ -1,7 +1,7 @@
-package com.example.trabalho.model.bd;
+package com.example.trabalho.model.DAO;
 
 import com.example.trabalho.model.Funcionario;
-import com.example.trabalho.model.Solicitacao;
+
 
 import java.util.List;
 

@@ -13,9 +13,9 @@ public class Funcionario {
     private Long id;
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "solicitacao")
-    private Solicitacao solicitacao;
+    // @ManyToOne
+    // @JoinColumn(name = "solicitacao")
+    // private Solicitacao solicitacao;
 
     public Funcionario() {
 
@@ -44,13 +44,13 @@ public class Funcionario {
     public void setId(Long id) {
         this.id = id;
     }
-    public Solicitacao getSolicitacao() {
-        return solicitacao;
-    }
-    public void setSolicitacao(Solicitacao solicitacao) {
-        this.solicitacao = solicitacao;
-    }
+    // public Solicitacao getSolicitacao() {
+    //     return solicitacao;
+    // }
+    // public void setSolicitacao(Solicitacao solicitacao) {
+    //     this.solicitacao = solicitacao;
+    // }
     public String toString(){
-        return "Funcionario [id=" + id + ", nome=" + nome + ", solicitacoes=" + getSolicitacao() + "]";
+        return "Funcionario [id=" + id + ", nome=" + nome + "]";
     }
 }
