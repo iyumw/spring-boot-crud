@@ -1,4 +1,4 @@
-insert into funcionario(id,nome) values (1,'silva pereira');
+insert into funcionario(id,nome) values (456781,'silva pereira');
 insert into funcionario(id,nome) values ('987654','danielle silva pereira');
 insert into funcionario(id,nome) values ( '652345','isis yume okamoto');
 insert into funcionario(id,nome) values ('459863', 'amanda victoria ribeiro');
